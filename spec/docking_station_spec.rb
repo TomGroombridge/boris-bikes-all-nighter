@@ -4,8 +4,8 @@ require "./lib/docking_station"
 describe DockingStation do 
 
 
-	let(:bike){Bike.new}
-	let(:station){DockingStation.new}
+	let(:bike) {Bike.new}
+	let(:station) {DockingStation.new}
 
 	it "should have no bikes in the docking station" do 
 		expect(station.bike_count).to eq (0)
@@ -45,6 +45,18 @@ describe DockingStation do
 	it "should not release bike if empty" do 
 		expect(lambda{station.release(bike)}).to raise_error(RuntimeError)
 	end
+
+	it "should show available bikes" do 
+		#why do these have to be 'Bike.new and can't be just bike
+		working_bike = Bike.new
+		broken_bike = Bike.new
+		broken_bike.break
+		station.dock(broken_bike)
+		station.dock(working_bike)
+		expect(station.available_bikes).to eq([working_bike])
+	end
+
+	
 
 	# it "should not release a 'not working' bike" do 
 	# 	broken_bike

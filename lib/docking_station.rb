@@ -1,3 +1,5 @@
+require "./lib/bike"
+
 class DockingStation
 
 DEFAULT_CAPACITY = 10
@@ -29,4 +31,8 @@ DEFAULT_CAPACITY = 10
 		bike_count == @capacity
 	end
 
+	def available_bikes
+
+		@bikes.select {|bike| bike.working?}
+	end
 end
